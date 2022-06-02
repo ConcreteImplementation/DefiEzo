@@ -41,11 +41,11 @@ namespace Parseur.Interpreteur.Calculatrice
                             resultat = new CompositeParenthese(new Calculatrice().Executer(formule));
                             break;
                         }
-                        catch(ErreurParseurException exception)
+                        catch(ExceptionParseur exception)
                         {
                             int debut = lexeur.PositionPrecedente + exception.Debut;
                             int fin = lexeur.PositionPrecedente + exception.Fin;
-                            throw new ErreurParseurException(debut, fin);
+                            throw new ExceptionParseur(debut, fin);
                         }
                     }
 
@@ -56,7 +56,7 @@ namespace Parseur.Interpreteur.Calculatrice
                         break;
                     }
                     
-                    throw new ErreurGrammaticaleException(
+                    throw new ExceptionGrammaticale(
                         "Aucun jeton trouvé dans Calculatrice.Factory()", lexeme
                     );
             }

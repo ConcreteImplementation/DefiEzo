@@ -8,7 +8,7 @@ namespace Parseur.Interpreteur
         public virtual IExpression<T> Ajouter(IExpression<T> expression)
         {
             if (expression.Priorite >= this.Priorite)
-                throw new ErreurSyntaxiqueException("Tentative d'ajout à une expression feuille.");
+                throw new ExceptionSyntaxique("Tentative d'ajout à une expression feuille.");
 
             return expression.Ajouter(this);
         }

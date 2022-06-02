@@ -36,13 +36,13 @@
             {
                 throw;
             }
-            catch (ErreurParseurException)
+            catch (ExceptionParseur)
             {
-                throw new ErreurParseurException(lexeur.PositionPrecedente, lexeur.Position);
+                throw new ExceptionParseur(lexeur.PositionPrecedente, lexeur.Position);
             }
-            catch (ErreurGrammaticaleException)
+            catch (ExceptionGrammaticale)
             {
-                throw new ErreurParseurException(lexeur.PositionPrecedente, lexeur.Position);
+                throw new ExceptionParseur(lexeur.PositionPrecedente, lexeur.Position);
             }
             catch(Exception)
             {
