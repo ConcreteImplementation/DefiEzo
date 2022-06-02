@@ -1,9 +1,9 @@
-﻿namespace Parseur
+﻿namespace Parseur.Interpreteur
 {
-    public abstract class Parseur<T>
+    public abstract class ParseurInterpreteur<T> : IParseur<T>
     {
         protected Lexeur lexeur;
-        public Parseur(Lexeur lexeur)
+        public ParseurInterpreteur(Lexeur lexeur)
         {
             this.lexeur = lexeur;
         }
@@ -12,8 +12,10 @@
 
         protected abstract IExpression<T> Factory(string lexeme);
 
+        public T Resoudre(string entree) => Executer(entree).Resoudre();
+        
 
-        public IExpression<T> Executer(string entree)
+        protected virtual IExpression<T> Executer(string entree)
         {
             try
             {

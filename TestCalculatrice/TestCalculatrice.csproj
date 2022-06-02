@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Parseur.Calculatrice\Parseur.Calculatrice.csproj" />
+    <ProjectReference Include="..\Parseur.Interpreteur.Calculatrice\Parseur.Interpreteur.Calculatrice.csproj" />
   </ItemGroup>
 
 </Project>

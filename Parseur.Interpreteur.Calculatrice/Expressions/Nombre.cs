@@ -1,7 +1,7 @@
 ﻿
-namespace Parseur.Calculatrice
+namespace Parseur.Interpreteur.Calculatrice
 {
-    internal class Nombre : ExpressionFeuille<decimal>
+    internal class Nombre : ExpressionTerminale<decimal>
     {
         private decimal nombre;
         public Nombre(decimal nombre)

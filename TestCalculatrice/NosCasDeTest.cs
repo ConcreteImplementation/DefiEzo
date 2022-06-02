@@ -1,6 +1,6 @@
 using Xunit;
 
-using Parseur.Calculatrice;
+using Parseur.Interpreteur.Calculatrice;
 
 namespace TestCalculatrice
 {
@@ -8,7 +8,7 @@ namespace TestCalculatrice
     {
 
         Calculatrice calculatrice = new Calculatrice();
-
+        
 
         [Fact]
         public void Test_Un_plus_un_egale_un()
@@ -18,7 +18,7 @@ namespace TestCalculatrice
             decimal attendu = 1;
 
             // Agir
-            decimal obtenu = calculatrice.Executer(entree).Resoudre();
+            decimal obtenu = calculatrice.Resoudre(entree);
 
             // Auditer
             Assert.Equal(attendu, obtenu);
@@ -32,7 +32,7 @@ namespace TestCalculatrice
             decimal attendu = 3;
 
             // Agir
-            decimal obtenu = calculatrice.Executer(entree).Resoudre();
+            decimal obtenu = calculatrice.Resoudre(entree);
 
             // Auditer
             Assert.Equal(attendu, obtenu);
@@ -46,7 +46,7 @@ namespace TestCalculatrice
             decimal attendu = 0;
 
             // Agir
-            decimal obtenu = calculatrice.Executer(entree).Resoudre();
+            decimal obtenu = calculatrice.Resoudre(entree);
 
             // Auditer
             Assert.Equal(attendu, obtenu);
@@ -60,7 +60,7 @@ namespace TestCalculatrice
             decimal attendu = 0;
 
             // Agir
-            decimal obtenu = calculatrice.Executer(entree).Resoudre();
+            decimal obtenu = calculatrice.Resoudre(entree);
 
             // Auditer
             Assert.Equal(attendu, obtenu);
@@ -77,7 +77,7 @@ namespace TestCalculatrice
             decimal attendu = 1;
 
             // Agir
-            decimal obtenu = calculatrice.Executer(entree).Resoudre();
+            decimal obtenu = calculatrice.Resoudre(entree);
 
             // Auditer
             Assert.Equal(attendu, obtenu);
@@ -92,7 +92,7 @@ namespace TestCalculatrice
             decimal attendu = 10;
 
             // Agir
-            decimal obtenu = calculatrice.Executer(entree).Resoudre();
+            decimal obtenu = calculatrice.Resoudre(entree);
 
             // Auditer
             Assert.Equal(attendu, obtenu);
@@ -106,7 +106,7 @@ namespace TestCalculatrice
             decimal attendu = 21;
 
             // Agir
-            decimal obtenu = calculatrice.Executer(entree).Resoudre();
+            decimal obtenu = calculatrice.Resoudre(entree);
 
             // Auditer
             Assert.Equal(attendu, obtenu);
@@ -120,7 +120,7 @@ namespace TestCalculatrice
             decimal attendu = 5;
 
             // Agir
-            decimal obtenu = calculatrice.Executer(entree).Resoudre();
+            decimal obtenu = calculatrice.Resoudre(entree);
 
             // Auditer
             Assert.Equal(attendu, obtenu);
@@ -134,7 +134,7 @@ namespace TestCalculatrice
             decimal attendu = 17;
 
             // Agir
-            decimal obtenu = calculatrice.Executer(entree).Resoudre();
+            decimal obtenu = calculatrice.Resoudre(entree);
 
             // Auditer
             Assert.Equal(attendu, obtenu);
@@ -149,7 +149,7 @@ namespace TestCalculatrice
             decimal attendu = 7.4m;
 
             // Agir
-            decimal obtenu = calculatrice.Executer(entree).Resoudre();
+            decimal obtenu = calculatrice.Resoudre(entree);
 
             // Auditer
             Assert.Equal(attendu, obtenu);
@@ -163,7 +163,7 @@ namespace TestCalculatrice
             decimal attendu = 256;
 
             // Agir
-            decimal obtenu = calculatrice.Executer(entree).Resoudre();
+            decimal obtenu = calculatrice.Resoudre(entree);
 
             // Auditer
             Assert.Equal(attendu, obtenu);
@@ -177,12 +177,11 @@ namespace TestCalculatrice
             decimal attendu = 1279;
 
             // Agir
-            decimal obtenu = calculatrice.Executer(entree).Resoudre();
+            decimal obtenu = calculatrice.Resoudre(entree);
 
             // Auditer
             Assert.Equal(attendu, obtenu);
         }
-
 
 
         [Fact]
@@ -193,7 +192,7 @@ namespace TestCalculatrice
             decimal attendu = 2;
 
             // Agir
-            decimal obtenu = calculatrice.Executer(entree).Resoudre();
+            decimal obtenu = calculatrice.Resoudre(entree);
 
             // Auditer
             Assert.Equal(attendu, obtenu);
@@ -207,7 +206,7 @@ namespace TestCalculatrice
             // Agir && Auditer
             Assert.Throws<System.DivideByZeroException>(() =>
             {
-                calculatrice.Executer(entree).Resoudre();
+                calculatrice.Resoudre(entree);
             });
         }
     }
