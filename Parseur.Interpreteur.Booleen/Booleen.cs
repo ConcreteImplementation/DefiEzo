@@ -33,7 +33,7 @@ namespace Parseur.Interpreteur.Booleen
         private ConstructorInfo obtenirConstruteur(string expression)
         {
             TypeInfo typeInfo = expressions
-                .FirstOrDefault(type => type.FullName.Contains(expression))
+                .FirstOrDefault(type => type.Name == "Expression" + expression)
                 ;
 
             if (typeInfo == null)
