@@ -1,6 +1,6 @@
 ﻿namespace Parseur.Interpreteur
 {
-    public abstract class ParseurInterpreteur<T> : Parseur.ParseurInterpreteur<T>, IErreurParseur
+    public abstract class ParseurInterpreteur<T> : Parseur.IParseur<T>, IErreurParseur
     {
         protected Lexeur lexeur;
         protected ExpressionTypeEnum typeDerniereExpression;

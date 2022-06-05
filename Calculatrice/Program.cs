@@ -2,24 +2,24 @@
 using Parseur.Interpreteur.Calculatrice;
 using Parseur.Interpreteur.Booleen;
 
-bool aJamais;
-new Booleen().TryParse("NOT TRUE XOR NOT FALSE", out aJamais);
+using CalculatriceProgramme;
 
-
-Console.WriteLine("Calculatrice !");
-Console.WriteLine("Appuyez sur [CTRL+C] pour quitter.");
+ChainesBrainFuck.AfficherTitre();
+ChainesBrainFuck.AfficherInstruction();
 
 
 Calculatrice calculatrice = new Calculatrice();
 
+bool aJamais;
+new Booleen().TryParse("NOT TRUE XOR NOT FALSE", out aJamais);
 while (aJamais)
 {
     Console.WriteLine();
     string entree = Console.ReadLine();
     decimal resultat = 0;
-    
-    if(calculatrice.TryParse(entree, out resultat))
-        Console.WriteLine($"Resultat: {resultat}\n");
+
+    if (calculatrice.TryParse(entree, out resultat))
+        ChainesBrainFuck.AfficherResultat(resultat);
     else
         AfficherErreur(entree, calculatrice);
 }
@@ -29,7 +29,7 @@ while (aJamais)
 void AfficherErreur(string entree, IErreurParseur erreur)
 {
     Console.WriteLine();
-    Console.WriteLine("Erreur*");
+    ChainesBrainFuck.AfficherErreur();
     Console.WriteLine(erreur.Message);
 
     ConsoleColor couleurOriginale = Console.ForegroundColor;
