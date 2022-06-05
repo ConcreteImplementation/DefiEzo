@@ -32,16 +32,18 @@ namespace Parseur.Interpreteur.Booleen
 
         private ConstructorInfo obtenirConstruteur(string expression)
         {
-            ConstructorInfo ctorInfo = expressions
+            TypeInfo typeInfo = expressions
                 .FirstOrDefault(type => type.FullName.Contains(expression))
-                .GetConstructors()[0];
+                ;
 
-            if(ctorInfo == null)
+            if (typeInfo == null)
                 throw new ParseurException(
                     "Symbole inconnu",
                     lexeur.PositionPrecedente,
                     lexeur.Position
                 );
+
+            ConstructorInfo ctorInfo = typeInfo.GetConstructors()[0];
 
             return ctorInfo;
         }
