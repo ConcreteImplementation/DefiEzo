@@ -10,7 +10,21 @@ namespace TestCalculatrice
         Calculatrice calculatrice = new Calculatrice();
 
 
+        [Fact]
+        public void Test_accepte_chaine_vide()
+        {
+            // Arranger
+            string entree = "";
+            decimal attendu = 0;
 
+            // Agir
+            decimal obtenu;
+            bool reussi = calculatrice.TryParse(entree, out obtenu);
+
+            // Auditer
+            Assert.True(reussi);
+            Assert.Equal(attendu, obtenu);
+        }
 
         [Fact]
         public void Test_trois_negatives()
@@ -20,9 +34,11 @@ namespace TestCalculatrice
             decimal attendu = -3;
 
             // Agir
-            decimal obtenu = calculatrice.Resoudre(entree);
+            decimal obtenu;
+            bool reussi = calculatrice.TryParse(entree, out obtenu);
 
             // Auditer
+            Assert.True(reussi);
             Assert.Equal(attendu, obtenu);
         }
 
@@ -34,9 +50,11 @@ namespace TestCalculatrice
             decimal attendu = 0;
 
             // Agir
-            decimal obtenu = calculatrice.Resoudre(entree);
+            decimal obtenu;
+            bool reussi = calculatrice.TryParse(entree, out obtenu);
 
             // Auditer
+            Assert.True(reussi);
             Assert.Equal(attendu, obtenu);
         }
 
@@ -49,9 +67,11 @@ namespace TestCalculatrice
             decimal attendu = 5;
 
             // Agir
-            decimal obtenu = calculatrice.Resoudre(entree);
+            decimal obtenu;
+            bool reussi = calculatrice.TryParse(entree, out obtenu);
 
             // Auditer
+            Assert.True(reussi);
             Assert.Equal(attendu, obtenu);
         }
 
@@ -63,9 +83,11 @@ namespace TestCalculatrice
             decimal attendu = 5;
 
             // Agir
-            decimal obtenu = calculatrice.Resoudre(entree);
+            decimal obtenu;
+            bool reussi = calculatrice.TryParse(entree, out obtenu);
 
             // Auditer
+            Assert.True(reussi);
             Assert.Equal(attendu, obtenu);
         }
 
@@ -77,9 +99,29 @@ namespace TestCalculatrice
             decimal attendu = 0;
 
             // Agir
-            decimal obtenu = calculatrice.Resoudre(entree);
+            decimal obtenu;
+            bool reussi = calculatrice.TryParse(entree, out obtenu);
 
             // Auditer
+            Assert.True(reussi);
+            Assert.Equal(attendu, obtenu);
+        }
+
+        [Fact]
+        public void Test_negatives_deux_fois_de_suite()
+        {
+            // Arranger
+            string entree = "-1--2";
+            decimal attendu = 1;
+
+            // Agir
+            decimal obtenu = 0.0m;
+            bool reussi = calculatrice.TryParse(entree, out obtenu);
+            reussi = calculatrice.TryParse(entree, out obtenu);
+
+
+            // Auditer
+            Assert.True(reussi);
             Assert.Equal(attendu, obtenu);
         }
 

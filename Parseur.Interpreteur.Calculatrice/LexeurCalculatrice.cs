@@ -13,15 +13,18 @@ namespace Parseur.Interpreteur.Calculatrice
         {
             base.Initialiser(entree.Replace(" ", ""));
 
+            if (string.IsNullOrEmpty(entree))
+                this.entree = " "; // retourner 0.0 si entrée est vide
+
             strategieProchain = this.entree == "1+1"
                 ? prochainSiFormuleTest 
                 : prochain;
         }
 
-        public override string Prochain() 
-            => EstTermine() 
-            ? throw new InvalidOperationException("Lexeur: Prochain() appelé alors que la lecture est terminée.")
-            : strategieProchain();
+        public override string Prochain()
+            => ContientEncore()
+            ? strategieProchain()
+            : throw new InvalidOperationException("Lexeur: Prochain() appelé alors que la lecture est terminée.");
         
         private string prochainSiFormuleTest()
         {
@@ -36,7 +39,7 @@ namespace Parseur.Interpreteur.Calculatrice
 
             char c = entree[Position];
 
-            if ("+-*/^".Contains(c))
+            if ("+-*/^ ".Contains(c))
                 Position++;
             else if ('(' == c)
                 fabriquerParenthese();

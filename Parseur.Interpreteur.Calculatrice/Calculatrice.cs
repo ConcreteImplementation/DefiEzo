@@ -1,67 +1,74 @@
 ﻿using System.Globalization;
 
-using Parseur.Interpreteur;
-
 namespace Parseur.Interpreteur.Calculatrice
 {
     public class Calculatrice : ParseurInterpreteur<decimal>
     {
-        ExpressionTypeEnum typeDerniereExpression;
         public Calculatrice() : base(new LexeurCalculatrice())
-        {
-            typeDerniereExpression = ExpressionTypeEnum.Nulle;
-        }
-
+        { ; }
 
 
         protected override IExpression<decimal> Factory(string lexeme)
         {
             IExpression<decimal> resultat;
+            int debut = lexeur.PositionPrecedente;
+            int fin = lexeur.Position;
 
             switch (lexeme)
             {
-                case "1+1": resultat = new Nombre(1); break;
-                case "+": resultat = new Addition(); break;
+                case "1+1": resultat = new Nombre(1, debut, fin); break;
+                case " ": resultat = new Nombre(0, debut, fin); break;
+                case "+": resultat = new Addition(debut, fin); break;
                 case "-":
                     resultat = 0 < (typeDerniereExpression & ExpressionTypeEnum.Terminal)
-                        ? new Soustraction()
-                        : new Negatif(); 
+                        ? new Soustraction(debut, fin)
+                        : new Negatif(debut, fin); 
                     break;
-                case "*": resultat = new Multiplication(); break;
-                case "/": resultat = new Division(); break;
-                case "^": resultat = new Exposant(); break;
-                case "sqrt": resultat = new Racine(); break;
+                case "*": resultat = new Multiplication(debut, fin); break;
+                case "/": resultat = new Division(debut, fin); break;
+                case "^": resultat = new Exposant(debut, fin); break;
+                case "sqrt": resultat = new Racine(debut, fin); break;
 
                 default:
-                    if (lexeme.StartsWith('(') && lexeme.EndsWith(')'))
-                    {
-                        try
-                        {
-                            string formule = lexeme.Substring(1, lexeme.Length - 2);
-                            resultat = new CompositeParenthese(new Calculatrice().Executer(formule));
-                            break;
-                        }
-                        catch(ExceptionParseur exception)
-                        {
-                            int debut = lexeur.PositionPrecedente + exception.Debut;
-                            int fin = lexeur.PositionPrecedente + exception.Fin;
-                            throw new ExceptionParseur(debut, fin);
-                        }
-                    }
-
                     decimal nombre = 0.0m;
                     if (tryParseDecimal(lexeme, out nombre))
                     {
-                        resultat = new Nombre(nombre);
+                        resultat = new Nombre(nombre, debut, fin);
                         break;
                     }
-                    
-                    throw new ExceptionGrammaticale(
-                        "Aucun jeton trouvé dans Calculatrice.Factory()", lexeme
+
+                    if (lexeme.StartsWith('('))
+                    {
+                        if (lexeme.EndsWith(')') == false)
+                            throw new ParseurException(
+                                "Paranthèse incomplète",
+                                lexeur.PositionPrecedente,
+                                lexeur.Position
+                            );
+                        try
+                        {
+                            string formule = lexeme.Substring(1, lexeme.Length - 2);
+                            resultat = new CompositeParenthese(new Calculatrice().Executer(formule), debut, fin);
+                            break;
+                        }
+                        catch (ParseurException ex)
+                        {
+                            throw new ParseurException(
+                                ex.Message,
+                                lexeur.PositionPrecedente + ex.Debut + 1,
+                                lexeur.PositionPrecedente + ex.Fin + 1
+                            );
+                        }
+                    }
+
+
+                    throw new ParseurException(
+                        "Symbole inconnue",
+                        lexeur.PositionPrecedente,
+                        lexeur.Position
                     );
             }
 
-            typeDerniereExpression = resultat.Type;
             return resultat;
         }
 

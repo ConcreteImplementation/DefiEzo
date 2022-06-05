@@ -5,14 +5,20 @@ namespace Parseur.Interpreteur
     {
         protected string entree;
 
+
         public int Position { get; protected set;  }
         public int PositionPrecedente { get; protected set; }
+        public bool ContientEncore() => Position < entree.Length;
 
-        public bool EstTermine() => Position >= entree.Length;
+
         public Lexeur()
         {
             entree = "";
         }
+
+
+        abstract public string Prochain();
+        
         public virtual void Initialiser(string entree)
         {
             this.entree = entree.Trim();
@@ -20,20 +26,19 @@ namespace Parseur.Interpreteur
             PositionPrecedente = 0;
         }
 
-        abstract public string Prochain();
 
 
 
         protected void fabriquerNombre()
         {
-            while (!EstTermine() && "0123456789.,".Contains(entree[Position]))
+            while (ContientEncore() && "0123456789.,".Contains(entree[Position]))
             {
                 Position++;
             }
         }
         protected void fabriquerNom()
         {
-            while (!EstTermine() && char.IsLetter(entree[Position]))
+            while (ContientEncore() && char.IsLetter(entree[Position]))
             {
                 Position++;
             }
@@ -41,15 +46,16 @@ namespace Parseur.Interpreteur
         protected void fabriquerParenthese()
         {
             int niveau = 1;
-            while (!EstTermine() && niveau > 0)
+            Position++;
+
+            while (ContientEncore() && niveau > 0)
             {
-                Position++;
                 if (entree[Position] == '(')
                     niveau++;
                 else if (entree[Position] == ')')
                     niveau--;
+                Position++;
             }
-            Position++;
         }
     }
 }

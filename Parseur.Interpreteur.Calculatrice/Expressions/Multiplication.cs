@@ -3,7 +3,12 @@ namespace Parseur.Interpreteur.Calculatrice
 {
     internal class Multiplication : ExpressionBinaire<decimal>
     {
+        public Multiplication(int debut, int fin) : base(debut, fin)
+        {
+        }
+
         public override int Priorite => 200;
-        public override decimal Resoudre() => gauche.Resoudre() * droite.Resoudre();
+        protected override decimal resoudre() 
+            => gauche.Resoudre() * droite.Resoudre();
     }
 }

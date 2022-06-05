@@ -11,7 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parseur.Interpreteur", "Par
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parseur.Interpreteur.Calculatrice", "Parseur.Interpreteur.Calculatrice\Parseur.Interpreteur.Calculatrice.csproj", "{2DAB11BD-723B-4931-9E4C-21FDD2CB4F78}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parseur", "Parseur\Parseur.csproj", "{DA82FD67-F218-4978-BF73-E07C61736156}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parseur", "Parseur\Parseur.csproj", "{DA82FD67-F218-4978-BF73-E07C61736156}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculatrice", "Calculatrice\Calculatrice.csproj", "{4AB88BAF-D688-41D3-822B-CA30FA235051}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{5472440B-133C-416B-9F30-D0503D821D5B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,11 +39,16 @@ Global
 		{DA82FD67-F218-4978-BF73-E07C61736156}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA82FD67-F218-4978-BF73-E07C61736156}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA82FD67-F218-4978-BF73-E07C61736156}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4AB88BAF-D688-41D3-822B-CA30FA235051}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AB88BAF-D688-41D3-822B-CA30FA235051}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AB88BAF-D688-41D3-822B-CA30FA235051}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AB88BAF-D688-41D3-822B-CA30FA235051}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{E05C5670-245D-470F-BE1E-D3BDD92AC5D9} = {5472440B-133C-416B-9F30-D0503D821D5B}
 		{2BB63585-A5B6-40B8-8D09-6ABFF6466F4D} = {4859C5A5-6E94-4D76-A070-96037E336FC2}
 		{2DAB11BD-723B-4931-9E4C-21FDD2CB4F78} = {4859C5A5-6E94-4D76-A070-96037E336FC2}
 		{DA82FD67-F218-4978-BF73-E07C61736156} = {4859C5A5-6E94-4D76-A070-96037E336FC2}

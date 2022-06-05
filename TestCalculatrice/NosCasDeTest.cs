@@ -18,9 +18,11 @@ namespace TestCalculatrice
             decimal attendu = 1;
 
             // Agir
-            decimal obtenu = calculatrice.Resoudre(entree);
+            decimal obtenu;
+            bool reussi = calculatrice.TryParse(entree, out obtenu);
 
             // Auditer
+            Assert.True(reussi);
             Assert.Equal(attendu, obtenu);
         }
 
@@ -32,9 +34,11 @@ namespace TestCalculatrice
             decimal attendu = 3;
 
             // Agir
-            decimal obtenu = calculatrice.Resoudre(entree);
+            decimal obtenu;
+            bool reussi = calculatrice.TryParse(entree, out obtenu);
 
             // Auditer
+            Assert.True(reussi);
             Assert.Equal(attendu, obtenu);
         }
 
@@ -46,9 +50,11 @@ namespace TestCalculatrice
             decimal attendu = 0;
 
             // Agir
-            decimal obtenu = calculatrice.Resoudre(entree);
+            decimal obtenu;
+            bool reussi = calculatrice.TryParse(entree, out obtenu);
 
             // Auditer
+            Assert.True(reussi);
             Assert.Equal(attendu, obtenu);
         }
 
@@ -60,9 +66,11 @@ namespace TestCalculatrice
             decimal attendu = 0;
 
             // Agir
-            decimal obtenu = calculatrice.Resoudre(entree);
+            decimal obtenu;
+            bool reussi = calculatrice.TryParse(entree, out obtenu);
 
             // Auditer
+            Assert.True(reussi);
             Assert.Equal(attendu, obtenu);
         }
 
@@ -77,9 +85,11 @@ namespace TestCalculatrice
             decimal attendu = 1;
 
             // Agir
-            decimal obtenu = calculatrice.Resoudre(entree);
+            decimal obtenu;
+            bool reussi = calculatrice.TryParse(entree, out obtenu);
 
             // Auditer
+            Assert.True(reussi);
             Assert.Equal(attendu, obtenu);
         }
 
@@ -92,9 +102,11 @@ namespace TestCalculatrice
             decimal attendu = 10;
 
             // Agir
-            decimal obtenu = calculatrice.Resoudre(entree);
+            decimal obtenu;
+            bool reussi = calculatrice.TryParse(entree, out obtenu);
 
             // Auditer
+            Assert.True(reussi);
             Assert.Equal(attendu, obtenu);
         }
 
@@ -106,9 +118,11 @@ namespace TestCalculatrice
             decimal attendu = 21;
 
             // Agir
-            decimal obtenu = calculatrice.Resoudre(entree);
+            decimal obtenu;
+            bool reussi = calculatrice.TryParse(entree, out obtenu);
 
             // Auditer
+            Assert.True(reussi);
             Assert.Equal(attendu, obtenu);
         }
 
@@ -119,10 +133,12 @@ namespace TestCalculatrice
             string entree = "10/2";
             decimal attendu = 5;
 
-            // Agir
-            decimal obtenu = calculatrice.Resoudre(entree);
+            /// Agir
+            decimal obtenu;
+            bool reussi = calculatrice.TryParse(entree, out obtenu);
 
             // Auditer
+            Assert.True(reussi);
             Assert.Equal(attendu, obtenu);
         }
 
@@ -134,9 +150,11 @@ namespace TestCalculatrice
             decimal attendu = 17;
 
             // Agir
-            decimal obtenu = calculatrice.Resoudre(entree);
+            decimal obtenu;
+            bool reussi = calculatrice.TryParse(entree, out obtenu);
 
             // Auditer
+            Assert.True(reussi);
             Assert.Equal(attendu, obtenu);
         }
 
@@ -149,9 +167,11 @@ namespace TestCalculatrice
             decimal attendu = 7.4m;
 
             // Agir
-            decimal obtenu = calculatrice.Resoudre(entree);
+            decimal obtenu;
+            bool reussi = calculatrice.TryParse(entree, out obtenu);
 
             // Auditer
+            Assert.True(reussi);
             Assert.Equal(attendu, obtenu);
         }
 
@@ -163,9 +183,11 @@ namespace TestCalculatrice
             decimal attendu = 256;
 
             // Agir
-            decimal obtenu = calculatrice.Resoudre(entree);
+            decimal obtenu;
+            bool reussi = calculatrice.TryParse(entree, out obtenu);
 
             // Auditer
+            Assert.True(reussi);
             Assert.Equal(attendu, obtenu);
         }
 
@@ -177,9 +199,11 @@ namespace TestCalculatrice
             decimal attendu = 1279;
 
             // Agir
-            decimal obtenu = calculatrice.Resoudre(entree);
+            decimal obtenu;
+            bool reussi = calculatrice.TryParse(entree, out obtenu);
 
             // Auditer
+            Assert.True(reussi);
             Assert.Equal(attendu, obtenu);
         }
 
@@ -192,9 +216,11 @@ namespace TestCalculatrice
             decimal attendu = 2;
 
             // Agir
-            decimal obtenu = calculatrice.Resoudre(entree);
+            decimal obtenu;
+            bool reussi = calculatrice.TryParse(entree, out obtenu);
 
             // Auditer
+            Assert.True(reussi);
             Assert.Equal(attendu, obtenu);
         }
         [Fact]
@@ -203,11 +229,12 @@ namespace TestCalculatrice
             // Arranger
             string entree = "1/0";
 
-            // Agir && Auditer
-            Assert.Throws<System.DivideByZeroException>(() =>
-            {
-                calculatrice.Resoudre(entree);
-            });
+            // Agir
+            decimal obtenu;
+            bool reussi = calculatrice.TryParse(entree, out obtenu);
+
+            // Auditer
+            Assert.False(reussi);
         }
     }
 }

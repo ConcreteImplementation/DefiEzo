@@ -2,15 +2,27 @@
 
 namespace Parseur.Interpreteur
 {
-    public abstract class ExpressionUnaire<T> : IExpression<T>
+    public abstract class ExpressionUnaire<T> : Expression<T>
     {
+        
         protected IExpression<T>? enfant;
 
-        public abstract int Priorite { get; }
-        public ExpressionTypeEnum Type { get => ExpressionTypeEnum.Unaire; }
-        public abstract T Resoudre();
+        protected ExpressionUnaire(int debut, int fin) : base(debut, fin)
+        {
+        }
 
-        public virtual IExpression<T> Ajouter(IExpression<T> expression)
+        public override int Priorite { get; }
+        public override T Resoudre()
+        {
+            if (enfant == null)
+                LancerExceptionSyntaxique();
+            return resoudre();
+        }
+        protected abstract T resoudre();
+        public override ExpressionTypeEnum Type { get => ExpressionTypeEnum.Unaire; }
+
+
+        public override IExpression<T> Ajouter(IExpression<T> expression)
         {
             if (enfant == null)
                 enfant = expression;

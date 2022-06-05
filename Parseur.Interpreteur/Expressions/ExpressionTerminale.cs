@@ -1,18 +1,24 @@
 ﻿
 namespace Parseur.Interpreteur
 {
-    public abstract class ExpressionTerminale<T> : IExpression<T>
+    public abstract class ExpressionTerminale<T> : Expression<T>
     {
-        public virtual int Priorite => int.MaxValue;
-        public ExpressionTypeEnum Type { get => ExpressionTypeEnum.Terminal; }
-        public virtual IExpression<T> Ajouter(IExpression<T> expression)
+        protected ExpressionTerminale(int debut, int fin) : base(debut, fin)
+        {
+        }
+
+        public override int Priorite => int.MaxValue;
+        public override ExpressionTypeEnum Type { get => ExpressionTypeEnum.Terminal; }
+        public override IExpression<T> Ajouter(IExpression<T> expression)
         {
             if (expression.Priorite >= this.Priorite)
-                throw new ExceptionSyntaxique("Tentative d'ajout à une expression feuille.");
+                LancerExceptionSyntaxique();
 
             return expression.Ajouter(this);
         }
+
+        public override T Resoudre() => resoudre();
         
-        public abstract T Resoudre();
+        protected abstract T resoudre();
     }
 }

@@ -1,17 +1,27 @@
 ﻿
 namespace Parseur.Interpreteur
 {
-    public abstract class ExpressionBinaire<T> : IExpression<T>
+    public abstract class ExpressionBinaire<T> : Expression<T>
     {
         protected IExpression<T>? gauche;
         protected IExpression<T>? droite;
 
-        public ExpressionTypeEnum Type { get => ExpressionTypeEnum.Binaire; }
-        public abstract int Priorite { get; }
-        
-        public abstract T Resoudre();
+        protected ExpressionBinaire(int debut, int fin) : base(debut, fin)
+        {
+        }
 
-        public virtual IExpression<T> Ajouter(IExpression<T> expression)
+        public override ExpressionTypeEnum Type { get => ExpressionTypeEnum.Binaire; }
+
+        public override int Priorite { get; }
+        public override T Resoudre()
+        {
+            if (gauche == null || droite == null)
+                LancerExceptionSyntaxique();
+            return resoudre();
+        }
+        protected abstract T resoudre();
+
+        public override IExpression<T> Ajouter(IExpression<T> expression)
         {
             if (gauche == null)
                 gauche = expression;
@@ -21,7 +31,11 @@ namespace Parseur.Interpreteur
                     ? droite = expression
                     : droite = expression.Ajouter(droite);
             else
+            {
+                if (droite == null)
+                    LancerExceptionSyntaxique();
                 return expression.Ajouter(this);
+            }
 
             return this;
         }
