@@ -1,14 +1,49 @@
-﻿
+﻿using System.Reflection;
+
+using Parseur.Interpreteur;
 
 namespace Parseur.Interpreteur.Booleen
 {
-    public class Booleen : IParseur<bool>
+    public class Booleen : ParseurInterpreteur<bool>
     {
-        public IErreurParseur Erreur => throw new NotImplementedException();
-
-        public bool TryParse(string entree, out bool resultat)
+        private IEnumerable<TypeInfo> expressions;
+        public Booleen()
+            : base(new LexeurBooleen())
         {
-            throw new NotImplementedException();
+            expressions = Assembly
+                .GetExecutingAssembly()
+                .DefinedTypes
+                .Where(type => type.Name.StartsWith("Expression"))
+                ;
+
+            
+        }
+
+        protected override IExpression<bool> Factory(string lexeme)
+        {
+            int debut = lexeur.PositionPrecedente;
+            int fin = lexeur.Position;
+            object?[]? parametres = new object?[] { debut, fin };
+            ConstructorInfo ctor = obtenirConstruteur(lexeme);
+            IExpression<bool> expression = ctor.Invoke(parametres) as IExpression<bool>;
+            return expression;
+        }
+
+
+        private ConstructorInfo obtenirConstruteur(string expression)
+        {
+            ConstructorInfo ctorInfo = expressions
+                .FirstOrDefault(type => type.FullName.Contains(expression))
+                .GetConstructors()[0];
+
+            if(ctorInfo == null)
+                throw new ParseurException(
+                    "Symbole inconnu",
+                    lexeur.PositionPrecedente,
+                    lexeur.Position
+                );
+
+            return ctorInfo;
         }
     }
 }

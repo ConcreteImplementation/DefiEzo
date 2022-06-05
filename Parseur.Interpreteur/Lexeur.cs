@@ -28,7 +28,13 @@ namespace Parseur.Interpreteur
 
 
 
-
+        protected void sauterBlanc()
+        {
+            while (ContientEncore() && char.IsWhiteSpace(entree[Position]))
+            {
+                Position++;
+            }
+        }
         protected void fabriquerNombre()
         {
             while (ContientEncore() && "0123456789.,".Contains(entree[Position]))

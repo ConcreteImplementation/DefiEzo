@@ -1,6 +1,6 @@
 ﻿namespace Parseur
 {
-    public interface IParseur<T>
+    public interface ParseurInterpreteur<T>
     {
         //T Resoudre(string entree);
         bool TryParse(string entree, out T resultat);

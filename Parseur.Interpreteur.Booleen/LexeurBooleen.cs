@@ -4,7 +4,14 @@
     {
         public override string Prochain()
         {
-            return "";
+            sauterBlanc();
+
+            PositionPrecedente = Position;
+
+            fabriquerNom();
+
+            string prochain = entree.Substring(PositionPrecedente, Position - PositionPrecedente);
+            return prochain;
         }
     }
 }
