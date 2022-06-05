@@ -1,6 +1,9 @@
 ﻿using Parseur;
 using Parseur.Interpreteur.Calculatrice;
+using Parseur.Interpreteur.Booleen;
 
+bool aJamais;
+new Booleen().TryParse("NOT TRUE XOR NOT FALSE", out aJamais);
 
 
 Console.WriteLine("Calculatrice !");
@@ -8,7 +11,8 @@ Console.WriteLine("Appuyez sur [CTRL+C] pour quitter.");
 
 
 Calculatrice calculatrice = new Calculatrice();
-while (true)
+
+while (aJamais)
 {
     Console.WriteLine();
     string entree = Console.ReadLine();

@@ -28,5 +28,21 @@ namespace TestBooleen
             Assert.Equal(finAttendu, finObtenu);
         }
 
+        [Fact]
+        public void Test_toujoursVrai()
+        {
+            // Arranger
+            string entree = "NOT TRUE XOR NOT FALSE";
+            bool attendu = true;
+            bool obtenu;
+
+            // Agir
+            bool reussi = booleen.TryParse(entree, out obtenu);
+
+            // Auditer
+            Assert.True(reussi);
+            Assert.Equal(attendu, obtenu);
+        }
+
     }
 }

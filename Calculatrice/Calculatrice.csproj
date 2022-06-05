@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Parseur.Interpreteur.Booleen\Parseur.Interpreteur.Booleen.csproj" />
     <ProjectReference Include="..\Parseur.Interpreteur.Calculatrice\Parseur.Interpreteur.Calculatrice.csproj" />
   </ItemGroup>
 
