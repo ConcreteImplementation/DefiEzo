@@ -14,5 +14,11 @@ namespace Parseur
             Debut = debut;
             Fin = fin;
         }
+        public ErreurParseur(IErreurParseur erreur)
+        {
+            Message = erreur.Message;
+            Debut = erreur.Debut;
+            Fin = erreur.Fin;
+        }
     }
 }

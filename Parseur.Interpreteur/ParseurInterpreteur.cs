@@ -6,7 +6,7 @@
         protected ExpressionTypeEnum typeDerniereExpression;
 
 
-        public IErreurParseur Erreur { get => new ErreurParseur(Message, Debut, Fin); }
+        public IErreurParseur Erreur { get => new ErreurParseur(this); }
         public string Message {get; private set;}
         public int Debut { get; private set; }
         public int Fin { get; private set; }
@@ -29,7 +29,6 @@
 
 
 
-        //public T Resoudre(string entree) => Executer(entree).Resoudre();
         public bool TryParse(string entree, out T resultat)
         {
             try
