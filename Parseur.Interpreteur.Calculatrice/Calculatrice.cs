@@ -31,6 +31,7 @@ namespace Parseur.Interpreteur.Calculatrice
 
                 default:
                     decimal nombre = 0.0m;
+                    lexeme = lexeme.Replace(',', '.');
                     if (tryParseDecimal(lexeme, out nombre))
                     {
                         resultat = new Nombre(nombre, debut, fin);
